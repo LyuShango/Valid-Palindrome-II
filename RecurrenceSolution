@@ -1,0 +1,25 @@
+class Solution {
+    public boolean palindrome(String s, int l, int r, boolean deleted){
+        boolean ans = true;
+        while(l < r){
+            if(s.charAt(l) == s.charAt(r)){
+                l++;
+                r--;
+            }else{
+                if(!deleted){
+                    ans = palindrome(s, l, r - 1, true);
+                    if(ans) return ans;
+                    ans = palindrome(s, l + 1, r, true);
+                    return ans;
+                }else{
+                    return false;
+                }
+            }
+        }
+        return ans;
+    }
+    
+    public boolean validPalindrome(String s) {
+        return palindrome(s, 0, s.length()-1, false);
+    }
+}
